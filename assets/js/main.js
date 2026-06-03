@@ -16,6 +16,15 @@ function loadComponents() {
         .then(data => {
             document.getElementById('main-footer').innerHTML = data;
         });
+
+    // Set favicon
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+    }
+    link.href = prefix + 'assets/images/logos/VFA_logo.png';
 }
 
-loadComponents(); // ← ADD THIS LINE
+loadComponents();
