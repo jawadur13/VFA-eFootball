@@ -1,0 +1,8 @@
+# Local development server script
+server.py
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
