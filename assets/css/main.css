@@ -197,3 +197,34 @@ nav {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+/* Responsive Layout Helpers */
+.grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    /* Responsive Navigation Header */
+    .nav-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px 15px;
+    }
+    .nav-links a {
+        margin-left: 0;
+        font-size: 0.85rem;
+    }
+
+    /* Collapse grids to single-column on mobile */
+    .grid-2-col {
+        grid-template-columns: 1fr;
+    }
+}

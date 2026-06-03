@@ -67,6 +67,17 @@
             background: var(--border-color);
             color: var(--text-main);
         }
+    
+        @media (max-width: 576px) {
+            .header-flex {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            .team-header {
+                padding: 30px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -95,7 +106,7 @@
         <h2>Current Squad</h2>
     </div>
 
-    <div class="card" style="padding: 0;">
+    <div class="card" style="padding: 0; overflow-x: auto;">
         <table class="player-table" id="squad-table">
             <thead>
                 <tr>

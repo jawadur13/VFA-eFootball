@@ -120,6 +120,30 @@
       flex-direction: column;
       gap: 8px;
     }
+
+    .matchday-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+      list-style: none;
+    }
+
+    @media (max-width: 576px) {
+      .match-links-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      .matchday-item {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+      }
+    }
   </style>
 </head>
 
@@ -223,10 +247,7 @@
         }
 
         const matchRow = m => `
-      <li style="display:flex; justify-content:space-between; align-items:center;
-                  padding:10px 14px; background:var(--bg-dark);
-                  border:1px solid var(--border-color); border-radius:6px;
-                  margin-bottom:8px; font-size:0.9rem; list-style:none;">
+      <li class="matchday-item">
         <span style="flex:1; text-align:right; font-weight:600;">${m.home}</span>
         <span style="padding:0 14px; color:var(--text-muted); font-size:0.75rem; font-weight:700;">vs</span>
         <span style="flex:1; text-align:left; font-weight:600;">${m.away}</span>
