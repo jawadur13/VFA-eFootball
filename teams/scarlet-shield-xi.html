@@ -99,6 +99,8 @@
                 <table class="player-table" id="squad-table">
                     <thead>
                         <tr>
+                            <th>No.</th>
+
                             <th>Player Name</th>
                             <th>Position</th>
                             <th>Note</th>
@@ -106,7 +108,7 @@
                     </thead>
                     <tbody id="squad-body">
                         <tr>
-                            <td colspan="3" style="text-align:center; color: var(--text-muted); font-style: italic;">Loading squad...</td>
+                            <td colspan="4" style="text-align:center; color: var(--text-muted); font-style: italic;">Loading squad...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -139,8 +141,10 @@
                         .sort((a, b) => (POSITION_ORDER[a.position] || 99) - (POSITION_ORDER[b.position] || 99));
 
                     const tbody = document.getElementById('squad-body');
-                    tbody.innerHTML = players.map(p => `
+                    tbody.innerHTML = players.map((p, i) => `
                         <tr>
+                            <td>${i + 1}</td>
+
                             <td>${p.name}</td>
                             <td>${p.position}</td>
                             <td style="color: var(--text-muted); font-size: 0.85rem;">${p.note}</td>
@@ -149,7 +153,7 @@
 
                 } catch (err) {
                     document.getElementById('squad-body').innerHTML = `
-                        <tr><td colspan="3" style="text-align:center; color: var(--text-muted);">Failed to load squad data.</td></tr>
+                        <tr><td colspan="4" style="text-align:center; color: var(--text-muted);">Failed to load squad data.</td></tr>
                     `;
                 }
             }
