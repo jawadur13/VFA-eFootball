@@ -172,3 +172,28 @@ nav {
 .ad-slot-footer { flex-direction: column; gap: 20px; margin-top: 40px; }
 .ad-label { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 8px; display: block; text-align: center; }
 @media (max-width: 768px) { .hide-on-mobile { display: none !important; } }
+
+/* Global Loading Spinner styles */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 20px;
+    gap: 12px;
+}
+
+.spinner {
+    width: 32px;
+    height: 32px;
+    border: 3.5px solid rgba(255, 255, 255, 0.1);
+    border-top: 3.5px solid var(--vpl-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
