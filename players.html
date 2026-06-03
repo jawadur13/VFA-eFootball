@@ -260,7 +260,7 @@
         <div class="database-table-container">
             <div id="tableLoader" class="loader-container">
                 <div class="spinner"></div>
-                <p style="color: var(--text-muted); font-size: 0.9rem;">Connecting to Google Sheets...</p>
+                <p style="color: var(--text-muted); font-size: 0.9rem;">Loading database...</p>
             </div>
 
             <table class="database-table" id="dbTable" style="display: none;">
@@ -431,7 +431,7 @@
                 document.getElementById('tableLoader').innerHTML = `
                     <p style="color: #ef4444; font-weight: bold;">Error loading players database.</p>
                     <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 400px; text-align: center;">
-                        There was an issue fetching the squad lists from the online spreadsheet. Check your internet connection or try again later.
+                        There was an issue fetching the player records. Check your internet connection or try again later.
                     </p>
                 `;
             }
