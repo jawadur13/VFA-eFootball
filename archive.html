@@ -852,21 +852,9 @@
         }
 
         init();
-
-        async function loadSharedComponents() {
-            try {
-                const headerRes = await fetch('components/header.html');
-                if (headerRes.ok) document.getElementById('main-header').innerHTML = await headerRes.text();
-
-                const footerRes = await fetch('components/footer.html');
-                if (footerRes.ok) document.getElementById('main-footer').innerHTML = await footerRes.text();
-            } catch (err) {
-                console.error("Shared components failed to load:", err);
-            }
-        }
-
-        loadSharedComponents();
     </script>
+
+    <script src="assets/js/main.js"></script>
 
 </body>
 </html>
