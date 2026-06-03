@@ -18,13 +18,19 @@ function loadComponents() {
         });
 
     // Set favicon
+    let faviconUrl = prefix + 'assets/images/logos/VFA_logo.png';
+    const teamLogoImg = document.querySelector('.team-logo-lg');
+    if (teamLogoImg) {
+        faviconUrl = teamLogoImg.src;
+    }
+
     let link = document.querySelector("link[rel~='icon']");
     if (!link) {
         link = document.createElement('link');
         link.rel = 'icon';
         document.head.appendChild(link);
     }
-    link.href = prefix + 'assets/images/logos/VFA_logo.png';
+    link.href = faviconUrl;
 }
 
 loadComponents();
