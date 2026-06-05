@@ -42,7 +42,8 @@
 
         .logo-ticker-track {
             display: flex;
-            width: calc(180px * 26); /* 13 logos * 2 sets */
+            width: calc(180px * 26);
+            /* 13 logos * 2 sets */
             animation: scroll 40s linear infinite;
         }
 
@@ -95,17 +96,34 @@
         }
 
         @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-180px * 13)); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-180px * 13));
+            }
         }
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
-            .logo-item { width: 140px; padding: 0 25px; }
-            .logo-ticker-track { width: calc(140px * 26); }
+            .logo-item {
+                width: 140px;
+                padding: 0 25px;
+            }
+
+            .logo-ticker-track {
+                width: calc(140px * 26);
+            }
+
             @keyframes scroll {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(calc(-140px * 13)); }
+                0% {
+                    transform: translateX(0);
+                }
+
+                100% {
+                    transform: translateX(calc(-140px * 13));
+                }
             }
         }
     </style>
@@ -138,39 +156,137 @@
 
         <!-- ── Team Logo Ticker ── -->
         <div style="text-align: center; margin-bottom: -10px; position: relative; z-index: 5;">
-            <span style="font-size: 0.7rem; color: var(--vcl-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 3px; background: var(--bg-dark); padding: 0 15px;">
+            <span
+                style="font-size: 0.7rem; color: var(--vcl-gold); font-weight: 700; text-transform: uppercase; letter-spacing: 3px; background: var(--bg-dark); padding: 0 15px;">
                 Meet the Contenders | Season 8
             </span>
         </div>
         <section class="logo-ticker-container">
             <div class="logo-ticker-track">
                 <!-- First set of logos -->
-                <div class="logo-item" data-name="Astral Warriors"><img src="assets/images/logos/astral-warriors.jpg" alt="Astral Warriors"></div>
-                <div class="logo-item" data-name="Beast Era FC"><img src="assets/images/logos/beast-era-fc.png" alt="Beast Era FC"></div>
-                <div class="logo-item" data-name="Blaze Dominion FC"><img src="assets/images/logos/blaze-dominion-fc.png" alt="Blaze Dominion FC"></div>
-                <div class="logo-item" data-name="The Hate Central FC"><img src="assets/images/logos/the-hate-central-fc.png" alt="The Hate Central FC"></div>
-                <div class="logo-item" data-name="Destroyers FC"><img src="assets/images/logos/destroyers-fc.jpg" alt="Destroyers FC"></div>
-                <div class="logo-item" data-name="Dream Fail Team"><img src="assets/images/logos/dream-fail-team.jpg" alt="Dream Fail Team"></div>
-                <div class="logo-item" data-name="Invincible Gunners"><img src="assets/images/logos/invincible-gunners.png" alt="Invincible Gunners"></div>
-                <div class="logo-item" data-name="Mystic Spyder"><img src="assets/images/logos/mystic-spyder.jpg" alt="Mystic Spyder"></div>
-                <div class="logo-item" data-name="NR Elite"><img src="assets/images/logos/nr-elite.png" alt="NR Elite"></div>
-                <div class="logo-item" data-name="Scarlet Shield XI"><img src="assets/images/logos/scarlet-shield-xi.png" alt="Scarlet Shield XI"></div>
-                <div class="logo-item" data-name="Star Vipers CF"><img src="assets/images/logos/star-vipers-cf.jpg" alt="Star Vipers CF"></div>
-                <div class="logo-item" data-name="Wretchedly Terrible FC"><img src="assets/images/logos/wretchedly-terrible-fc.png" alt="Wretchedly Terrible FC"></div>
-                
+                <div class="logo-item" data-name="Astral Warriors"><img src="assets/images/logos/astral-warriors.jpg"
+                        alt="Astral Warriors"></div>
+                <div class="logo-item" data-name="Beast Era FC"><img src="assets/images/logos/beast-era-fc.png"
+                        alt="Beast Era FC"></div>
+                <div class="logo-item" data-name="Blaze Dominion FC"><img
+                        src="assets/images/logos/blaze-dominion-fc.png" alt="Blaze Dominion FC"></div>
+                <div class="logo-item" data-name="The Hate Central FC"><img
+                        src="assets/images/logos/the-hate-central-fc.png" alt="The Hate Central FC"></div>
+                <div class="logo-item" data-name="Destroyers FC"><img src="assets/images/logos/destroyers-fc.jpg"
+                        alt="Destroyers FC"></div>
+                <div class="logo-item" data-name="Dream Fail Team"><img src="assets/images/logos/dream-fail-team.jpg"
+                        alt="Dream Fail Team"></div>
+                <div class="logo-item" data-name="Invincible Gunners"><img
+                        src="assets/images/logos/invincible-gunners.png" alt="Invincible Gunners"></div>
+                <div class="logo-item" data-name="Mystic Spyder"><img src="assets/images/logos/mystic-spyder.jpg"
+                        alt="Mystic Spyder"></div>
+                <div class="logo-item" data-name="NR Elite"><img src="assets/images/logos/nr-elite.png" alt="NR Elite">
+                </div>
+                <div class="logo-item" data-name="Scarlet Shield XI"><img
+                        src="assets/images/logos/scarlet-shield-xi.png" alt="Scarlet Shield XI"></div>
+                <div class="logo-item" data-name="Star Vipers CF"><img src="assets/images/logos/star-vipers-cf.jpg"
+                        alt="Star Vipers CF"></div>
+                <div class="logo-item" data-name="Wretchedly Terrible FC"><img
+                        src="assets/images/logos/wretchedly-terrible-fc.png" alt="Wretchedly Terrible FC"></div>
+
                 <!-- Duplicate set for seamless loop -->
-                <div class="logo-item" data-name="Astral Warriors"><img src="assets/images/logos/astral-warriors.jpg" alt="Astral Warriors"></div>
-                <div class="logo-item" data-name="Beast Era FC"><img src="assets/images/logos/beast-era-fc.png" alt="Beast Era FC"></div>
-                <div class="logo-item" data-name="Blaze Dominion FC"><img src="assets/images/logos/blaze-dominion-fc.png" alt="Blaze Dominion FC"></div>
-                <div class="logo-item" data-name="The Hate Central FC"><img src="assets/images/logos/the-hate-central-fc.png" alt="The Hate Central FC"></div>
-                <div class="logo-item" data-name="Destroyers FC"><img src="assets/images/logos/destroyers-fc.jpg" alt="Destroyers FC"></div>
-                <div class="logo-item" data-name="Dream Fail Team"><img src="assets/images/logos/dream-fail-team.jpg" alt="Dream Fail Team"></div>
-                <div class="logo-item" data-name="Invincible Gunners"><img src="assets/images/logos/invincible-gunners.png" alt="Invincible Gunners"></div>
-                <div class="logo-item" data-name="Mystic Spyder"><img src="assets/images/logos/mystic-spyder.jpg" alt="Mystic Spyder"></div>
-                <div class="logo-item" data-name="NR Elite"><img src="assets/images/logos/nr-elite.png" alt="NR Elite"></div>
-                <div class="logo-item" data-name="Scarlet Shield XI"><img src="assets/images/logos/scarlet-shield-xi.png" alt="Scarlet Shield XI"></div>
-                <div class="logo-item" data-name="Star Vipers CF"><img src="assets/images/logos/star-vipers-cf.jpg" alt="Star Vipers CF"></div>
-                <div class="logo-item" data-name="Wretchedly Terrible FC"><img src="assets/images/logos/wretchedly-terrible-fc.png" alt="Wretchedly Terrible FC"></div>
+                <div class="logo-item" data-name="Astral Warriors"><img src="assets/images/logos/astral-warriors.jpg"
+                        alt="Astral Warriors"></div>
+                <div class="logo-item" data-name="Beast Era FC"><img src="assets/images/logos/beast-era-fc.png"
+                        alt="Beast Era FC"></div>
+                <div class="logo-item" data-name="Blaze Dominion FC"><img
+                        src="assets/images/logos/blaze-dominion-fc.png" alt="Blaze Dominion FC"></div>
+                <div class="logo-item" data-name="The Hate Central FC"><img
+                        src="assets/images/logos/the-hate-central-fc.png" alt="The Hate Central FC"></div>
+                <div class="logo-item" data-name="Destroyers FC"><img src="assets/images/logos/destroyers-fc.jpg"
+                        alt="Destroyers FC"></div>
+                <div class="logo-item" data-name="Dream Fail Team"><img src="assets/images/logos/dream-fail-team.jpg"
+                        alt="Dream Fail Team"></div>
+                <div class="logo-item" data-name="Invincible Gunners"><img
+                        src="assets/images/logos/invincible-gunners.png" alt="Invincible Gunners"></div>
+                <div class="logo-item" data-name="Mystic Spyder"><img src="assets/images/logos/mystic-spyder.jpg"
+                        alt="Mystic Spyder"></div>
+                <div class="logo-item" data-name="NR Elite"><img src="assets/images/logos/nr-elite.png" alt="NR Elite">
+                </div>
+                <div class="logo-item" data-name="Scarlet Shield XI"><img
+                        src="assets/images/logos/scarlet-shield-xi.png" alt="Scarlet Shield XI"></div>
+                <div class="logo-item" data-name="Star Vipers CF"><img src="assets/images/logos/star-vipers-cf.jpg"
+                        alt="Star Vipers CF"></div>
+                <div class="logo-item" data-name="Wretchedly Terrible FC"><img
+                        src="assets/images/logos/wretchedly-terrible-fc.png" alt="Wretchedly Terrible FC"></div>
+            </div>
+        </section>
+
+        <!-- ── Theme Song Teaser Video ── -->
+        <section style="margin: 40px 0; display: flex; justify-content: center;">
+            <div class="card"
+                style="max-width: 500px; width: 100%; text-align: center; border: 1px solid var(--vcl-gold); background: linear-gradient(180deg, var(--surface-card) 0%, rgba(13, 17, 23, 0.6) 100%);">
+                <span
+                    style="color: var(--vcl-gold); font-weight: bold; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;">
+                    🎥 Official Hype Teaser
+                </span>
+                <h2 style="margin: 10px 0; font-size: 1.6rem; color: var(--text-main);">Thunder in the Air</h2>
+                <p
+                    style="color: var(--vcl-gold); font-size: 0.95rem; font-weight: 600; margin-bottom: 5px; letter-spacing: 1px;">
+                    One Alliance. One Dream. One Legacy.
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 20px;">
+                    Get ready for Season 8. Watch the official theme song teaser.
+                </p>
+                <!-- Square Video Wrapper -->
+                <div
+                    style="max-width: 400px; width: 100%; aspect-ratio: 1/1; margin: 0 auto; border-radius: 8px; overflow: hidden; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5); border: 1px solid var(--border-color); background: #000;">
+                    <video id="teaserVideo" src="assets/video/Song%20of%20VFA%201st%20teaser.mp4" controls playsinline
+                        style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    </video>
+                    <!-- Lyrics Overlay -->
+                    <div id="lyricsOverlay"
+                        style="position: absolute; bottom: 65px; left: 5%; width: 90%; text-align: center; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 10px var(--vcl-gold); font-size: 1.05rem; font-weight: bold; padding: 8px 12px; background: rgba(13, 17, 23, 0.75); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 6px; pointer-events: none; z-index: 10; transition: opacity 0.3s ease, transform 0.3s ease; opacity: 0; transform: translateY(5px); line-height: 1.4;">
+                    </div>
+                </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                        const video = document.getElementById('teaserVideo');
+                        const lyricsBox = document.getElementById('lyricsOverlay');
+
+                        // Lyrics sync database (in seconds)
+                        // Adjust start/end numbers here to tweak synchronization with the audio track
+                        const lyrics = [
+                            { start: 0.0, end: 4.3, text: "One Alliance, one dream, one legacy," },
+                            { start: 4.3, end: 6.9, text: "We fight for the crest and the victory," },
+                            { start: 6.9, end: 9.6, text: "Through every fall, we rise again," },
+                            { start: 9.6, end: 13.3, text: "Side by side till the very end." },
+                            { start: 14.3, end: 18.3, text: "One Alliance, one dream, one name in the light," },
+                            { start: 18.3, end: 21.3, text: "We play for the roar, we play through the night," },
+                            { start: 21.3, end: 26.3, text: "When the final whistle calls, we’ll stand tall and free," },
+                            { start: 26.3, end: 30.3, text: "One Alliance, one dream, one legacy." }
+                        ];
+
+                        if (video && lyricsBox) {
+                            video.addEventListener('timeupdate', () => {
+                                const time = video.currentTime;
+                                const currentLine = lyrics.find(l => time >= l.start && time < l.end);
+
+                                if (currentLine && !video.seeking) {
+                                    if (lyricsBox.textContent !== currentLine.text) {
+                                        lyricsBox.textContent = currentLine.text;
+                                    }
+                                    lyricsBox.style.opacity = '1';
+                                    lyricsBox.style.transform = 'translateY(0)';
+                                } else {
+                                    lyricsBox.style.opacity = '0';
+                                    lyricsBox.style.transform = 'translateY(5px)';
+                                }
+                            });
+
+                            // Clear lyrics if user jumps around/seeks the video timeline
+                            video.addEventListener('seeking', () => {
+                                lyricsBox.style.opacity = '0';
+                            });
+                        }
+                    });
+                </script>
             </div>
         </section>
 
@@ -247,27 +363,37 @@
 
         <!-- Teams and Players Directory Cards -->
         <div class="grid-2-col" style="margin-bottom: 40px;">
-            <div class="card" style="border-top: 3px solid var(--vss-silver); display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card"
+                style="border-top: 3px solid var(--vss-silver); display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <h2 style="color: var(--vss-silver); margin-bottom: 5px;">Teams Directory</h2>
-                    <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Official League Clubs</p>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">Explore all 12 league managers, team logos, and complete club squads.</p>
+                    <p
+                        style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                        Official League Clubs</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">Explore all 12 league
+                        managers, team logos, and complete club squads.</p>
                 </div>
                 <div>
                     <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 15px 0;">
-                    <a href="teams/" class="btn-outline" style="font-weight: bold; display: block;">View Teams Directory</a>
+                    <a href="teams/" class="btn-outline" style="font-weight: bold; display: block;">View Teams
+                        Directory</a>
                 </div>
             </div>
 
-            <div class="card" style="border-top: 3px solid var(--vcl-gold); display: flex; flex-direction: column; justify-content: space-between;">
+            <div class="card"
+                style="border-top: 3px solid var(--vcl-gold); display: flex; flex-direction: column; justify-content: space-between;">
                 <div>
                     <h2 style="color: var(--vcl-gold); margin-bottom: 5px;">Player Database</h2>
-                    <p style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">League Roster Directory</p>
-                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">Search and filter the complete player pool by name, position, and club.</p>
+                    <p
+                        style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">
+                        League Roster Directory</p>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 10px;">Search and filter the
+                        complete player pool by name, position, and club.</p>
                 </div>
                 <div>
                     <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 15px 0;">
-                    <a href="players" class="btn-outline gold" style="font-weight: bold; display: block;">Search Players Database</a>
+                    <a href="players" class="btn-outline gold" style="font-weight: bold; display: block;">Search Players
+                        Database</a>
                 </div>
             </div>
         </div>
