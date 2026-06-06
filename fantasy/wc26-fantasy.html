@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFA World Cup 26 Fantasy Standings | VFA eFootball</title>
+    <meta name="description" content="Join the official VFA World Cup 2026 Fantasy League. Track points, view member standings, and win prizes.">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        body, button, input, select {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        h1, h2, h3, h4, .logo, .badge-gold, .btn-primary, .details-value {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .fantasy-hero {
+            background: linear-gradient(135deg, rgba(13, 27, 75, 0.85) 0%, rgba(10, 15, 44, 0.9) 100%);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: var(--radius);
+            padding: 40px 30px;
+            margin-top: 30px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .fantasy-hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 183, 0, 0.12) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .badge-gold {
+            background: linear-gradient(90deg, var(--vcl-gold), #FFD700);
+            color: #0A0F2C;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 15px rgba(255, 183, 0, 0.35);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--vcl-gold) 0%, #FFA500 100%);
+            color: #0A0F2C;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 6px;
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 183, 0, 0.3);
+            margin-top: 15px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 183, 0, 0.45);
+        }
+
+        /* 3-Manager Podium layout */
+        .podium-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 40px auto;
+            max-width: 750px;
+            align-items: end;
+        }
+
+        .podium-card {
+            background: rgba(13, 27, 75, 0.5);
+            border: 1px solid rgba(30, 144, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .podium-card.first {
+            height: 220px;
+            border-color: var(--vcl-gold);
+            background: linear-gradient(180deg, rgba(255, 183, 0, 0.08) 0%, rgba(13, 27, 75, 0.5) 100%);
+            box-shadow: 0 10px 25px rgba(255, 183, 0, 0.1);
+        }
+
+        .podium-card.second {
+            height: 190px;
+            border-color: var(--vss-silver);
+        }
+
+        .podium-card.third {
+            height: 170px;
+            border-color: #CD7F32;
+        }
+
+        .podium-badge {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 900;
+            margin: 0 auto 10px auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .podium-badge.first { background: var(--vcl-gold); color: #0A0F2C; }
+        .podium-badge.second { background: var(--vss-silver); color: #0A0F2C; }
+        .podium-badge.third { background: #CD7F32; color: #FFF; }
+
+        .podium-name {
+            font-weight: 800;
+            font-size: 1.05rem;
+            color: var(--text-main);
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .podium-team {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .podium-points {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--text-main);
+        }
+
+        .podium-points span {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* 2 Column Standings and Join Panel Grid */
+        .layout-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 25px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+
+        @media (max-width: 992px) {
+            .layout-grid {
+                grid-template-columns: 1fr;
+            }
+            .podium-container {
+                max-width: 500px;
+            }
+            .podium-card.first { height: 200px; }
+            .podium-card.second { height: 175px; }
+            .podium-card.third { height: 160px; }
+        }
+
+        @media (max-width: 500px) {
+            .podium-container {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .podium-card.first, .podium-card.second, .podium-card.third {
+                height: auto;
+                padding: 15px;
+            }
+        }
+
+        /* Standings Table container */
+        .standings-card {
+            background: rgba(13, 27, 75, 0.4);
+            border: 1px solid rgba(30, 144, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 20px 0 0 0;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .table-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px 15px 20px;
+            border-bottom: 1px solid rgba(30, 144, 255, 0.15);
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 250px;
+            width: 100%;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 9px 12px 9px 36px;
+            background: var(--bg-dark);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            border-radius: 5px;
+            color: var(--text-main);
+            font-size: 0.88rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--vcl-gold);
+            box-shadow: 0 0 8px rgba(255, 183, 0, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            width: 14px;
+            height: 14px;
+            pointer-events: none;
+        }
+
+        /* Standings Table styling */
+        .standings-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .standings-table th {
+            text-align: left;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 20px;
+            border-bottom: 2px solid rgba(30, 144, 255, 0.2);
+            background: rgba(10, 15, 44, 0.3);
+        }
+
+        .standings-table td {
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(30, 144, 255, 0.1);
+            font-size: 0.9rem;
+        }
+
+        .standings-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .standings-table tr:hover {
+            background: rgba(255, 255, 255, 0.015);
+        }
+
+        .rank-lbl {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .trend-icon {
+            font-size: 0.8rem;
+            margin-left: 5px;
+            display: inline-block;
+        }
+
+        .trend-up { color: #10B981; }
+        .trend-down { color: var(--accent-red); }
+        .trend-same { color: var(--text-muted); }
+
+        /* Details & Join Panel styling */
+        .join-panel {
+            background: rgba(13, 27, 75, 0.4);
+            border: 1px solid rgba(30, 144, 255, 0.2);
+            border-radius: var(--radius);
+            padding: 22px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .panel-section-title {
+            border-bottom: 1px solid rgba(30, 144, 255, 0.15);
+            padding-bottom: 8px;
+            margin: 0;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .league-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .details-card {
+            background: rgba(10, 15, 44, 0.5);
+            border: 1px solid rgba(30, 144, 255, 0.15);
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .details-card.full-width {
+            grid-column: span 2;
+        }
+
+        .details-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .details-value {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
+        .details-value.gold {
+            color: var(--vcl-gold);
+            text-shadow: 0 0 10px rgba(255, 183, 0, 0.2);
+        }
+
+        .code-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--bg-dark);
+            border: 1px dashed rgba(255, 183, 0, 0.4);
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin-top: 5px;
+        }
+
+        .code-text {
+            font-family: monospace;
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: var(--vcl-gold);
+            letter-spacing: 1px;
+        }
+
+        .btn-copy {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.2s;
+        }
+
+        .btn-copy:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-main);
+        }
+
+        .join-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .join-step-item {
+            display: flex;
+            gap: 12px;
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+        }
+
+        .step-num {
+            background: rgba(30, 144, 255, 0.15);
+            color: var(--vpl-primary);
+            border: 1px solid rgba(30, 144, 255, 0.3);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .step-num.gold {
+            background: rgba(255, 183, 0, 0.15);
+            color: var(--vcl-gold);
+            border-color: rgba(255, 183, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Main Header navigation component -->
+    <div id="main-header"></div>
+
+    <main class="container">
+        
+        <!-- Hero section explaining that fantasy is played on play.fifa.com -->
+        <section class="fantasy-hero">
+            <span class="badge-gold">World Cup 2026 Edition</span>
+            <h1 style="font-size: 2.2rem; font-weight: 900; margin: 0 0 8px 0; color: var(--text-main);">
+                VFA World Cup Fantasy Hub
+            </h1>
+            <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto 15px auto; font-size: 0.95rem; line-height: 1.6;">
+                The VFA Fantasy League is officially hosted on the **FIFA Play** platform. Craft your squad, manage your transfers, and compete against other VFA managers on the official site. Check below for the localized VFA leaderboard results!
+            </p>
+            
+            <!-- Outbound CTA Link to FIFA Fantasy league directly -->
+            <a href="https://play.fifa.com/fantasy/join-league/T61MCHOP" target="_blank" rel="noopener noreferrer" class="btn-primary" id="btnGoToFIFA">
+                <span>Join VFA League Directly</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                </svg>
+            </a>
+        </section>
+
+        <!-- Top 3 Podium Highlights -->
+        <section class="podium-container" aria-label="Current Leaderboard Podium">
+            <!-- 2nd Place -->
+            <div class="podium-card second" id="podium-2">
+                <div class="podium-badge second">🥈</div>
+                <div class="podium-name" id="pod2-name">Pending</div>
+                <div class="podium-team" id="pod2-team">TBD</div>
+                <div class="podium-points" id="pod2-points">—</div>
+            </div>
+            
+            <!-- 1st Place (Center / Tallest) -->
+            <div class="podium-card first" id="podium-1">
+                <div class="podium-badge first">🏆</div>
+                <div class="podium-name" id="pod1-name">Pending</div>
+                <div class="podium-team" id="pod1-team">TBD</div>
+                <div class="podium-points" id="pod1-points">—</div>
+            </div>
+            
+            <!-- 3rd Place -->
+            <div class="podium-card third" id="podium-3">
+                <div class="podium-badge third">🥉</div>
+                <div class="podium-name" id="pod3-name">Pending</div>
+                <div class="podium-team" id="pod3-team">TBD</div>
+                <div class="podium-points" id="pod3-points">—</div>
+            </div>
+        </section>
+
+        <!-- Main Content Layout -->
+        <div class="layout-grid">
+            
+            <!-- Left: Results Leaderboard Standings -->
+            <section class="standings-card">
+                <div class="table-header-row">
+                    <h2 style="font-size: 1.25rem; margin: 0; color: var(--text-main);">
+                        📊 Member Standings
+                    </h2>
+                    
+                    <!-- Search Filter Box -->
+                    <div class="search-box">
+                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text" id="standingsSearch" class="search-input" placeholder="Search manager or team...">
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="standings-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 70px;">Rank</th>
+                                <th>Manager / Member</th>
+                                <th>Fantasy Team Name</th>
+                                <th style="width: 130px; text-align: right;">Matchday Pts</th>
+                                <th style="width: 120px; text-align: right;">Total Points</th>
+                            </tr>
+                        </thead>
+                        <tbody id="standings-tbody">
+                            <!-- Loader / Pending State -->
+                            <tr>
+                                <td colspan="5" style="text-align: center; padding: 50px;">
+                                    <div class="spinner" id="table-spinner"></div>
+                                    <p id="table-status-text" style="color: var(--text-muted); font-size: 0.88rem; margin-top: 10px;">Loading standings data...</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Right: Details Card & Guide -->
+            <aside class="join-panel">
+                <div>
+                    <h3 class="panel-section-title">🏆 League Info</h3>
+                    <div class="league-details-grid" style="margin-top: 15px;">
+                        <div class="details-card">
+                            <div class="details-label">Entry Fee</div>
+                            <div class="details-value gold">Entry Free</div>
+                        </div>
+                        <div class="details-card">
+                            <div class="details-label">Prize Pool</div>
+                            <div class="details-value">600 BDT</div>
+                        </div>
+                        <div class="details-card full-width">
+                            <div class="details-label">League Joining Code</div>
+                            <div class="code-box">
+                                <span class="code-text" id="leagueCode">T61MCHOP</span>
+                                <button class="btn-copy" id="btnCopyCode" onclick="copyLeagueCode()">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="panel-section-title">📋 How to Participate</h3>
+                    <ol class="join-steps" style="margin-top: 15px;">
+                        <li class="join-step-item">
+                            <span class="step-num">1</span>
+                            <div>
+                                <strong style="color: var(--text-main);">Create your account</strong>
+                                <p style="margin-top: 2px;">Visit <a href="https://play.fifa.com/fantasy/" target="_blank" rel="noopener noreferrer" style="color: var(--vpl-primary); text-decoration: none;">FIFA Play Fantasy</a> and set up your profile.</p>
+                            </div>
+                        </li>
+                        <li class="join-step-item">
+                            <span class="step-num">2</span>
+                            <div>
+                                <strong style="color: var(--text-main);">Join via Direct Link</strong>
+                                <p style="margin-top: 2px;">Click <a href="https://play.fifa.com/fantasy/join-league/T61MCHOP" target="_blank" rel="noopener noreferrer" style="color: var(--vcl-gold); text-decoration: none; font-weight: 600;">Direct League Joining Link</a> to automatically register.</p>
+                            </div>
+                        </li>
+                        <li class="join-step-item">
+                            <span class="step-num">3</span>
+                            <div>
+                                <strong style="color: var(--text-main);">Or Enter Code Manually</strong>
+                                <p style="margin-top: 2px;">Navigate to leagues on FIFA Play and enter the private league code: <strong style="color: var(--vcl-gold);">T61MCHOP</strong>.</p>
+                            </div>
+                        </li>
+                        <li class="join-step-item">
+                            <span class="step-num gold">★</span>
+                            <div>
+                                <strong style="color: var(--vcl-gold);">Track standings here</strong>
+                                <p style="margin-top: 2px;">Points will populate here once the tournament matches begin and results are synchronized.</p>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </aside>
+
+        </div>
+
+    </main>
+
+    <!-- Dynamic Main Footer component -->
+    <div id="main-footer"></div>
+
+    <script>
+        // Configurable Google Sheets CSV URL for Fantasy Leaderboard Standings
+        // Note: Managers can customize the published GID once the sheet is created.
+        const FANTASY_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTNRLcKodSD9CAu-KbkHOifpeoQ3LLNWEOE4ac5KOyuJNxQGNM83W8WPAg-N97gOfFNV9KmF3FuJAyI/pub?gid=0&single=true&output=csv';
+
+        // Initialized empty standings data
+        let standingsData = [];
+
+        // Clipboard Copy Action
+        function copyLeagueCode() {
+            navigator.clipboard.writeText("T61MCHOP").then(() => {
+                const btn = document.getElementById("btnCopyCode");
+                if (!btn) return;
+                const originalText = btn.innerHTML;
+                btn.innerHTML = "Copied!";
+                btn.style.color = "var(--vcl-gold)";
+                btn.style.borderColor = "var(--vcl-gold)";
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.color = "";
+                    btn.style.borderColor = "";
+                }, 2000);
+            }).catch(err => {
+                console.error("Failed to copy text: ", err);
+            });
+        }
+
+        // Parse trend indicator icons
+        function getTrendIcon(trend) {
+            if (trend === 'up') return '<span class="trend-icon trend-up">▲</span>';
+            if (trend === 'down') return '<span class="trend-icon trend-down">▼</span>';
+            return '<span class="trend-icon trend-same">▬</span>';
+        }
+
+        // Render podium managers (top 3)
+        function renderPodium(data) {
+            const isPending = data.length === 0 || data.every(d => d.totalPts === "Pending" || d.totalPts === 0 || d.totalPts === "—");
+            
+            if (isPending || data.length < 3) {
+                document.getElementById('pod1-name').textContent = "Pending";
+                document.getElementById('pod1-team').textContent = "TBD";
+                document.getElementById('pod1-points').innerHTML = `—`;
+
+                document.getElementById('pod2-name').textContent = "Pending";
+                document.getElementById('pod2-team').textContent = "TBD";
+                document.getElementById('pod2-points').innerHTML = `—`;
+
+                document.getElementById('pod3-name').textContent = "Pending";
+                document.getElementById('pod3-team').textContent = "TBD";
+                document.getElementById('pod3-points').innerHTML = `—`;
+                return;
+            }
+            
+            // 1st place
+            document.getElementById('pod1-name').textContent = data[0].manager;
+            document.getElementById('pod1-team').textContent = data[0].team;
+            document.getElementById('pod1-points').innerHTML = `${data[0].totalPts} <span>pts</span>`;
+
+            // 2nd place
+            document.getElementById('pod2-name').textContent = data[1].manager;
+            document.getElementById('pod2-team').textContent = data[1].team;
+            document.getElementById('pod2-points').innerHTML = `${data[1].totalPts} <span>pts</span>`;
+
+            // 3rd place
+            document.getElementById('pod3-name').textContent = data[2].manager;
+            document.getElementById('pod3-team').textContent = data[2].team;
+            document.getElementById('pod3-points').innerHTML = `${data[2].totalPts} <span>pts</span>`;
+        }
+
+        // Render table records
+        function renderTable(data) {
+            const tbody = document.getElementById('standings-tbody');
+            if (!tbody) return;
+
+            if (data.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="5" style="text-align:center; color: var(--text-muted); padding: 50px;">
+                            <p style="font-size: 1.05rem; color: var(--text-main); margin-bottom: 5px; font-weight: 700;">Standings Pending</p>
+                            <p style="font-size: 0.85rem; max-width: 400px; margin: 0 auto; line-height: 1.5;">Standings data will display dynamically once the tournament starts and results are published in the fantasy database.</p>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = data.map(m => {
+                const mdPtsStr = typeof m.matchdayPts === 'number' ? `${m.matchdayPts} pts` : m.matchdayPts;
+                const totalPtsStr = typeof m.totalPts === 'number' ? `${m.totalPts} pts` : m.totalPts;
+                
+                return `
+                    <tr>
+                        <td>
+                            <span class="rank-lbl">${m.rank}</span>
+                            ${getTrendIcon(m.trend)}
+                        </td>
+                        <td style="font-weight: 700; color: var(--text-main);">${m.manager}</td>
+                        <td>${m.team}</td>
+                        <td style="text-align: right; font-weight: 700; color: var(--vcl-gold);">${mdPtsStr}</td>
+                        <td style="text-align: right; font-weight: 800; color: var(--text-main);">${totalPtsStr}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Load standings dynamically from Google Sheet or leave empty/pending
+        async function loadFantasyStandings() {
+            try {
+                const res = await fetch(FANTASY_CSV_URL);
+                if (!res.ok) throw new Error("Fetch failed");
+                const csvText = await res.text();
+                
+                // Parse CSV into structured rows
+                const lines = csvText.trim().split('\n').slice(1); // skip headers
+                const parsed = lines.map((line, index) => {
+                    const cols = line.split(',').map(c => c.trim());
+                    const rankVal = cols[0] || (index + 1);
+                    const matchdayPtsVal = isNaN(cols[3]) ? (cols[3] || "Pending") : parseInt(cols[3]);
+                    const totalPtsVal = isNaN(cols[4]) ? (cols[4] || "Pending") : parseInt(cols[4]);
+                    
+                    return {
+                        rank: rankVal,
+                        manager: cols[1] || 'Manager',
+                        team: cols[2] || 'Team Name',
+                        matchdayPts: matchdayPtsVal,
+                        totalPts: totalPtsVal,
+                        trend: cols[5] || 'same'
+                    };
+                }).filter(p => p.manager && p.manager !== 'Manager');
+
+                if (parsed.length > 0) {
+                    standingsData = parsed;
+                } else {
+                    standingsData = [];
+                }
+            } catch (err) {
+                console.log("No dynamic sheet configured yet or server offline. Defaulting to pending layout.");
+                standingsData = [];
+            }
+
+            // Sort by Rank only if rank is a number
+            standingsData.sort((a, b) => {
+                if (typeof a.rank === 'number' && typeof b.rank === 'number') {
+                    return a.rank - b.rank;
+                }
+                return 0;
+            });
+
+            renderPodium(standingsData);
+            renderTable(standingsData);
+        }
+
+        // Filter search input
+        function initSearchFilter() {
+            const searchInput = document.getElementById('standingsSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    const filtered = standingsData.filter(m => 
+                        m.manager.toLowerCase().includes(query) || 
+                        m.team.toLowerCase().includes(query)
+                    );
+                    renderTable(filtered);
+                });
+            }
+        }
+
+        // Init routine
+        async function initPage() {
+            initSearchFilter();
+            await loadFantasyStandings();
+        }
+
+        window.addEventListener('DOMContentLoaded', initPage);
+
+        // Header and Footer subfolder loader injection script
+        document.addEventListener("DOMContentLoaded", function() {
+            const prefix = '../';
+            
+            // Load global Header component
+            fetch(prefix + 'components/header.html')
+                .then(res => {
+                    if (!res.ok) throw new Error("Header not found");
+                    return res.text();
+                })
+                .then(data => {
+                    document.getElementById('main-header').innerHTML = data;
+                })
+                .catch(err => console.error("Error loading header component:", err));
+
+            // Load global Footer component
+            fetch(prefix + 'components/footer.html')
+                .then(res => {
+                    if (!res.ok) throw new Error("Footer not found");
+                    return res.text();
+                })
+                .then(data => {
+                    document.getElementById('main-footer').innerHTML = data;
+                })
+                .catch(err => console.error("Error loading footer component:", err));
+
+            // Set favicon URL
+            let faviconUrl = prefix + 'assets/images/logos/VFA_logo.png';
+            let link = document.querySelector("link[rel~='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = faviconUrl;
+        });
+    </script>
+</body>
+</html>
