@@ -193,7 +193,7 @@
             }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width: 600px) {
             .podium-container {
                 grid-template-columns: 1fr;
                 gap: 15px;
@@ -201,6 +201,15 @@
             .podium-card.first, .podium-card.second, .podium-card.third {
                 height: auto;
                 padding: 15px;
+            }
+            .podium-card.first {
+                order: 1;
+            }
+            .podium-card.second {
+                order: 2;
+            }
+            .podium-card.third {
+                order: 3;
             }
         }
 
