@@ -89,7 +89,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 15px;
-            margin: 40px auto;
+            margin: 20px auto 40px auto;
             max-width: 750px;
             align-items: end;
         }
@@ -170,25 +170,27 @@
             font-weight: 500;
         }
 
-        /* 2 Column Standings and Join Panel Grid */
-        .layout-grid {
+        /* Onboarding elements */
+        .onboarding-grid {
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1.1fr 0.9fr;
             gap: 25px;
-            margin-bottom: 60px;
             align-items: start;
         }
 
         @media (max-width: 992px) {
-            .layout-grid {
-                grid-template-columns: 1fr;
-            }
             .podium-container {
                 max-width: 500px;
             }
             .podium-card.first { height: 200px; }
             .podium-card.second { height: 175px; }
             .podium-card.third { height: 160px; }
+        }
+
+        @media (max-width: 768px) {
+            .onboarding-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 500px) {
@@ -210,6 +212,7 @@
             padding: 20px 0 0 0;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            margin-bottom: 60px;
         }
 
         .table-header-row {
@@ -311,9 +314,6 @@
             border-radius: var(--radius);
             padding: 22px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
         }
 
         .panel-section-title {
@@ -324,22 +324,12 @@
             color: var(--text-main);
         }
 
-        .league-details-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
         .details-card {
             background: rgba(10, 15, 44, 0.5);
             border: 1px solid rgba(30, 144, 255, 0.15);
             border-radius: 6px;
             padding: 12px;
             text-align: center;
-        }
-
-        .details-card.full-width {
-            grid-column: span 2;
         }
 
         .details-label {
@@ -465,100 +455,36 @@
             </a>
         </section>
 
-        <!-- Top 3 Podium Highlights -->
-        <section class="podium-container" aria-label="Current Leaderboard Podium">
-            <!-- 2nd Place -->
-            <div class="podium-card second" id="podium-2">
-                <div class="podium-badge second">🥈</div>
-                <div class="podium-name" id="pod2-name">Pending</div>
-                <div class="podium-team" id="pod2-team">TBD</div>
-                <div class="podium-points" id="pod2-points">—</div>
-            </div>
+        <!-- Onboarding and League details section placed FIRST for clear visibility -->
+        <section style="margin-top: 30px; display: flex; flex-direction: column; gap: 25px;">
             
-            <!-- 1st Place (Center / Tallest) -->
-            <div class="podium-card first" id="podium-1">
-                <div class="podium-badge first">🏆</div>
-                <div class="podium-name" id="pod1-name">Pending</div>
-                <div class="podium-team" id="pod1-team">TBD</div>
-                <div class="podium-points" id="pod1-points">—</div>
-            </div>
-            
-            <!-- 3rd Place -->
-            <div class="podium-card third" id="podium-3">
-                <div class="podium-badge third">🥉</div>
-                <div class="podium-name" id="pod3-name">Pending</div>
-                <div class="podium-team" id="pod3-team">TBD</div>
-                <div class="podium-points" id="pod3-points">—</div>
-            </div>
-        </section>
-
-        <!-- Main Content Layout -->
-        <div class="layout-grid">
-            
-            <!-- Left: Results Leaderboard Standings -->
-            <section class="standings-card">
-                <div class="table-header-row">
-                    <h2 style="font-size: 1.25rem; margin: 0; color: var(--text-main);">
-                        📊 Member Standings
-                    </h2>
-                    
-                    <!-- Search Filter Box -->
-                    <div class="search-box">
-                        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                        <input type="text" id="standingsSearch" class="search-input" placeholder="Search manager or team...">
+            <!-- 🏆 League Info (Fee, Prize, Code) -->
+            <div class="join-panel">
+                <h3 class="panel-section-title">🏆 League Info</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <div class="details-card" style="margin: 0;">
+                        <div class="details-label">Entry Fee</div>
+                        <div class="details-value gold">Entry Free</div>
                     </div>
-                </div>
-
-                <div style="overflow-x: auto;">
-                    <table class="standings-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 70px;">Rank</th>
-                                <th>Manager / Member</th>
-                                <th>Fantasy Team Name</th>
-                                <th style="width: 130px; text-align: right;">Matchday Pts</th>
-                                <th style="width: 120px; text-align: right;">Total Points</th>
-                            </tr>
-                        </thead>
-                        <tbody id="standings-tbody">
-                            <!-- Loader / Pending State -->
-                            <tr>
-                                <td colspan="5" style="text-align: center; padding: 50px;">
-                                    <div class="spinner" id="table-spinner"></div>
-                                    <p id="table-status-text" style="color: var(--text-muted); font-size: 0.88rem; margin-top: 10px;">Loading standings data...</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <!-- Right: Details Card & Guide -->
-            <aside class="join-panel">
-                <div>
-                    <h3 class="panel-section-title">🏆 League Info</h3>
-                    <div class="league-details-grid" style="margin-top: 15px;">
-                        <div class="details-card">
-                            <div class="details-label">Entry Fee</div>
-                            <div class="details-value gold">Entry Free</div>
-                        </div>
-                        <div class="details-card">
-                            <div class="details-label">Prize Pool</div>
-                            <div class="details-value">600 BDT</div>
-                        </div>
-                        <div class="details-card full-width">
-                            <div class="details-label">League Joining Code</div>
-                            <div class="code-box">
-                                <span class="code-text" id="leagueCode">T61MCHOP</span>
-                                <button class="btn-copy" id="btnCopyCode" onclick="copyLeagueCode()">Copy</button>
-                            </div>
+                    <div class="details-card" style="margin: 0;">
+                        <div class="details-label">Prize Pool</div>
+                        <div class="details-value">600 BDT</div>
+                    </div>
+                    <div class="details-card" style="margin: 0; display: flex; flex-direction: column; justify-content: center; min-height: 60px;">
+                        <div class="details-label">League Joining Code</div>
+                        <div class="code-box" style="margin: 5px 0 0 0;">
+                            <span class="code-text" id="leagueCode">T61MCHOP</span>
+                            <button class="btn-copy" id="btnCopyCode" onclick="copyLeagueCode()">Copy</button>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div>
+            <!-- Onboarding Grid: Steps and Tutorial side by side -->
+            <div class="onboarding-grid">
+                
+                <!-- Left: How to Participate -->
+                <div class="join-panel" style="height: 100%; box-sizing: border-box;">
                     <h3 class="panel-section-title">📋 How to Participate</h3>
                     <ol class="join-steps" style="margin-top: 15px;">
                         <li class="join-step-item">
@@ -591,9 +517,95 @@
                         </li>
                     </ol>
                 </div>
-            </aside>
 
-        </div>
+                <!-- Right: Video Tutorial -->
+                <div class="join-panel" style="height: 100%; box-sizing: border-box;">
+                    <h3 class="panel-section-title">🎥 Video Tutorial</h3>
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 6px; border: 1px solid rgba(30, 144, 255, 0.2); margin-top: 15px; background: #000;">
+                        <iframe src="https://www.youtube.com/embed/0N5OXuy2FOM" 
+                                title="FIFA Play Fantasy Tutorial Video" 
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Standings Leaderboard Title Separator -->
+        <h2 style="font-size: 1.6rem; color: var(--text-main); margin: 60px 0 20px 0; text-align: center; font-family: 'Outfit', sans-serif;">
+            🏆 Leaderboard Standings
+        </h2>
+
+        <!-- Top 3 Podium Highlights -->
+        <section class="podium-container" aria-label="Current Leaderboard Podium">
+            <!-- 2nd Place -->
+            <div class="podium-card second" id="podium-2">
+                <div class="podium-badge second">🥈</div>
+                <div class="podium-name" id="pod2-name">Pending</div>
+                <div class="podium-team" id="pod2-team">TBD</div>
+                <div class="podium-points" id="pod2-points">—</div>
+            </div>
+            
+            <!-- 1st Place (Center / Tallest) -->
+            <div class="podium-card first" id="podium-1">
+                <div class="podium-badge first">🏆</div>
+                <div class="podium-name" id="pod1-name">Pending</div>
+                <div class="podium-team" id="pod1-team">TBD</div>
+                <div class="podium-points" id="pod1-points">—</div>
+            </div>
+            
+            <!-- 3rd Place -->
+            <div class="podium-card third" id="podium-3">
+                <div class="podium-badge third">🥉</div>
+                <div class="podium-name" id="pod3-name">Pending</div>
+                <div class="podium-team" id="pod3-team">TBD</div>
+                <div class="podium-points" id="pod3-points">—</div>
+            </div>
+        </section>
+
+        <!-- Standings Table Container (Full Width) -->
+        <section class="standings-card">
+            <div class="table-header-row">
+                <h2 style="font-size: 1.25rem; margin: 0; color: var(--text-main);">
+                    📊 Member Standings
+                </h2>
+                
+                <!-- Search Filter Box -->
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" id="standingsSearch" class="search-input" placeholder="Search manager or team...">
+                </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="standings-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 70px;">Rank</th>
+                            <th>Manager / Member</th>
+                            <th>Fantasy Team Name</th>
+                            <th style="width: 130px; text-align: right;">Matchday Pts</th>
+                            <th style="width: 120px; text-align: right;">Total Points</th>
+                        </tr>
+                    </thead>
+                    <tbody id="standings-tbody">
+                        <!-- Loader / Pending State -->
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 50px;">
+                                <div class="spinner" id="table-spinner"></div>
+                                <p id="table-status-text" style="color: var(--text-muted); font-size: 0.88rem; margin-top: 10px;">Loading standings data...</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
 
     </main>
 
