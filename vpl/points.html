@@ -46,9 +46,11 @@
                 </tbody>
             </table>
         </div>
-        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px; padding-left: 5px;">
-            * Points adjusted due to disciplinary incidents.
-        </p>
+        <div style="margin-top: 20px; padding: 12px 15px; border-left: 4px solid var(--vpl-primary); background: var(--surface-hover, rgba(255,255,255,0.05)); border-radius: 6px;">
+            <p style="color: var(--text-muted); font-size: 0.85rem; margin: 0;">
+                <span style="color: var(--vpl-primary); font-weight: bold; font-size: 1.1em; margin-right: 5px;">*</span> Points adjusted due to disciplinary incidents.
+            </p>
+        </div>
         <div style="margin-top: 40px; text-align: center;">
             <a href="schedule" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">← View Match Results</a>
         </div>
@@ -108,7 +110,7 @@
                         : `<div style="width:30px;height:30px;border-radius:50%;background:var(--surface-hover);display:inline-block;"></div>`;
                     const isTop4 = i < 4;
                     const nameStyle = isTop4 ? 'font-weight:bold;' : '';
-                    const pointsText = t.name.toLowerCase() === 'mystic spyder' ? t.pts + '<sup style="color: var(--vpl-primary); margin-left: 2px;">*</sup>' : t.pts;
+                    const pointsText = t.name.toLowerCase() === 'mystic spyder' ? t.pts + '<sup style="color: var(--vpl-primary); margin-left: 2px; font-size: 1.1em;">*</sup>' : t.pts;
                     return `
                             <tr class="${isTop4 ? 'qualify-zone' : ''}">
                                 <td style="padding-left:20px;">${i + 1}</td>
