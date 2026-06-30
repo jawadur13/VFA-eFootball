@@ -46,6 +46,9 @@
                 </tbody>
             </table>
         </div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px; padding-left: 5px;">
+            * Points adjusted due to disciplinary incidents.
+        </p>
         <div style="margin-top: 40px; text-align: center;">
             <a href="schedule" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">← View Match Results</a>
         </div>
@@ -105,6 +108,7 @@
                         : `<div style="width:30px;height:30px;border-radius:50%;background:var(--surface-hover);display:inline-block;"></div>`;
                     const isTop4 = i < 4;
                     const nameStyle = isTop4 ? 'font-weight:bold;' : '';
+                    const pointsText = t.name.toLowerCase() === 'mystic spyder' ? t.pts + '<sup style="color: var(--vpl-primary); margin-left: 2px;">*</sup>' : t.pts;
                     return `
                             <tr class="${isTop4 ? 'qualify-zone' : ''}">
                                 <td style="padding-left:20px;">${i + 1}</td>
@@ -117,7 +121,7 @@
                                 <td>${t.gf}</td>
                                 <td>${t.ga}</td>
                                 <td>${t.gd}</td>
-                                <td style="padding-right:20px;"><strong>${t.pts}</strong></td>
+                                <td style="padding-right:20px;"><strong>${pointsText}</strong></td>
                             </tr>`;
                 }).join('');
 
