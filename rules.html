@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,7 +15,7 @@
             margin: 40px 0;
             align-items: start;
         }
-        
+
         .mobile-toc-toggle {
             display: none;
             background: var(--surface-card);
@@ -27,7 +28,7 @@
             font-weight: bold;
             text-align: center;
         }
-        
+
         .toc-sidebar {
             position: sticky;
             top: 100px;
@@ -39,7 +40,7 @@
             max-height: calc(100vh - 120px);
             overflow-y: auto;
         }
-        
+
         .toc-sidebar h3 {
             color: var(--vcl-gold);
             margin-bottom: 15px;
@@ -47,16 +48,16 @@
             text-transform: uppercase;
             letter-spacing: 1px;
         }
-        
+
         .toc-sidebar ul {
             list-style: none;
             padding-left: 0;
         }
-        
+
         .toc-sidebar li {
             margin-bottom: 10px;
         }
-        
+
         .toc-sidebar a {
             color: var(--text-muted);
             text-decoration: none;
@@ -65,13 +66,14 @@
             display: block;
             line-height: 1.4;
         }
-        
+
         .toc-sidebar a:hover {
             color: var(--vpl-primary);
         }
-        
+
         .rulebook-content {
-            min-width: 0; /* CRITICAL: Prevents CSS Grid blowout */
+            min-width: 0;
+            /* CRITICAL: Prevents CSS Grid blowout */
             background: var(--surface-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
@@ -83,7 +85,7 @@
             word-wrap: break-word;
             overflow-x: hidden;
         }
-        
+
         /* Markdown Styling */
         .rulebook-content h1 {
             color: var(--vpl-primary);
@@ -92,33 +94,51 @@
             border-bottom: 2px solid rgba(30, 144, 255, 0.2);
             font-size: 1.8rem;
         }
-        .rulebook-content h1:first-child { margin-top: 0; }
+
+        .rulebook-content h1:first-child {
+            margin-top: 0;
+        }
+
         .rulebook-content h2 {
             color: var(--vcl-gold);
             margin: 30px 0 15px;
             font-size: 1.4rem;
         }
+
         .rulebook-content h3 {
             color: #fff;
             margin: 25px 0 10px;
             font-size: 1.15rem;
         }
-        .rulebook-content p { margin-bottom: 15px; }
-        .rulebook-content ul, .rulebook-content ol {
+
+        .rulebook-content p {
+            margin-bottom: 15px;
+        }
+
+        .rulebook-content ul,
+        .rulebook-content ol {
             margin-bottom: 20px;
             padding-left: 20px;
         }
+
         .rulebook-content li {
             margin-bottom: 8px;
         }
+
         .rulebook-content hr {
             border: 0;
             border-top: 1px solid var(--border-color);
             margin: 30px 0;
             opacity: 0.3;
         }
-        .rulebook-content strong { color: #fff; font-weight: 600; }
-        .rulebook-content img, .rulebook-content video {
+
+        .rulebook-content strong {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .rulebook-content img,
+        .rulebook-content video {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
@@ -131,6 +151,7 @@
             right: 30px;
             z-index: 9999;
         }
+
         #chat-toggle-btn {
             background: var(--vpl-primary);
             color: white;
@@ -140,16 +161,18 @@
             height: 65px;
             font-size: 28px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.3s, background 0.3s;
         }
+
         #chat-toggle-btn:hover {
             transform: scale(1.1);
             background: #106ebd;
         }
+
         #chat-window {
             display: none;
             position: absolute;
@@ -160,10 +183,11 @@
             background: var(--bg-dark);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
             flex-direction: column;
             overflow: hidden;
         }
+
         #chat-header {
             background: var(--surface-card);
             padding: 15px 20px;
@@ -171,7 +195,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: move;
         }
+
         #chat-header h4 {
             margin: 0;
             color: var(--vcl-gold);
@@ -180,6 +206,7 @@
             align-items: center;
             gap: 10px;
         }
+
         #close-chat {
             background: none;
             border: none;
@@ -188,8 +215,11 @@
             font-size: 20px;
             transition: color 0.2s;
         }
-        #close-chat:hover { color: white; }
-        
+
+        #close-chat:hover {
+            color: white;
+        }
+
         #chat-messages {
             flex: 1;
             padding: 20px;
@@ -198,6 +228,7 @@
             flex-direction: column;
             gap: 15px;
         }
+
         .msg {
             max-width: 85%;
             padding: 12px 16px;
@@ -206,6 +237,7 @@
             line-height: 1.4;
             word-wrap: break-word;
         }
+
         .msg.bot {
             background: var(--surface-card);
             border: 1px solid rgba(255, 255, 255, 0.05);
@@ -213,16 +245,18 @@
             align-self: flex-start;
             border-bottom-left-radius: 4px;
         }
+
         .msg.user {
             background: var(--vpl-primary);
             color: white;
             align-self: flex-end;
             border-bottom-right-radius: 4px;
         }
+
         .msg strong {
             color: var(--vcl-gold);
         }
-        
+
         #chat-input-area {
             display: flex;
             padding: 15px;
@@ -230,10 +264,11 @@
             background: var(--surface-card);
             gap: 10px;
         }
+
         #chat-input {
             flex: 1;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: white;
             padding: 12px 18px;
             border-radius: 25px;
@@ -241,9 +276,11 @@
             font-size: 0.95rem;
             transition: border-color 0.2s;
         }
+
         #chat-input:focus {
             border-color: var(--vpl-primary);
         }
+
         #send-btn {
             background: var(--vpl-primary);
             color: white;
@@ -258,8 +295,11 @@
             font-size: 1.1rem;
             transition: background 0.2s;
         }
-        #send-btn:hover { background: #106ebd; }
-        
+
+        #send-btn:hover {
+            background: #106ebd;
+        }
+
         .typing-indicator {
             display: none;
             padding: 0 20px 15px;
@@ -273,25 +313,56 @@
             .rules-layout {
                 grid-template-columns: 1fr;
             }
+
             .mobile-toc-toggle {
-                display: block;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                margin: 0;
+                padding: 0;
+                font-size: 24px;
+                z-index: 9998;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+                background: var(--vpl-primary);
+                color: white;
             }
+
             .toc-sidebar {
                 display: none;
-                position: static;
-                max-height: none;
-                margin-bottom: 20px;
+                position: fixed;
+                bottom: 90px;
+                left: 20px;
+                width: 280px;
+                max-width: calc(100vw - 40px);
+                max-height: calc(100vh - 120px);
+                margin: 0;
+                z-index: 9998;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
             }
+
             .toc-sidebar.active {
                 display: block;
             }
+
             .rulebook-content {
                 padding: 20px;
                 font-size: 1rem;
             }
-            .rulebook-content h1 { font-size: 1.5rem; }
-            .rulebook-content h2 { font-size: 1.25rem; }
-            
+
+            .rulebook-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .rulebook-content h2 {
+                font-size: 1.25rem;
+            }
+
             #chat-window {
                 position: fixed;
                 bottom: 100px;
@@ -302,6 +373,7 @@
                 border-radius: 12px;
                 z-index: 10000;
             }
+
             #vfa-chat-widget {
                 bottom: 20px;
                 right: 20px;
@@ -309,26 +381,29 @@
         }
     </style>
 </head>
+
 <body>
     <div id="main-header"></div>
 
     <main class="container">
         <section style="margin: 40px 0; text-align: center;">
-            <h1 style="color: var(--vpl-primary); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px;">Official Rulebook</h1>
+            <h1 style="color: var(--vpl-primary); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px;">
+                Official Rulebook</h1>
             <p style="color: var(--vcl-gold); font-weight: bold; letter-spacing: 2px;">VFA SEASON 8 REGULATIONS</p>
         </section>
 
         <div class="rules-layout">
             <!-- Mobile Toggle -->
-            <div class="mobile-toc-toggle" id="mobile-toc-toggle">
-                ☰ Table of Contents
+            <div class="mobile-toc-toggle" id="mobile-toc-toggle" aria-label="Table of Contents">
+                ☰
             </div>
 
             <!-- Sidebar TOC -->
             <aside class="toc-sidebar">
                 <h3>Sections</h3>
                 <ul id="toc-list">
-                    <li><span class="spinner" style="width: 15px; height: 15px; border-width: 2px;"></span> Loading...</li>
+                    <li><span class="spinner" style="width: 15px; height: 15px; border-width: 2px;"></span> Loading...
+                    </li>
                 </ul>
             </aside>
 
@@ -351,11 +426,12 @@
                 <button id="close-chat" aria-label="Close Chat">✖</button>
             </div>
             <div id="chat-messages">
-                <div class="msg bot">Hello! I am the official VFA AI Assistant. I have memorized the entire Season 8 Rulebook. What do you need help with?</div>
+                <div class="msg bot">Hello! I am the official VFA AI Assistant. What do you need help with?</div>
             </div>
             <div class="typing-indicator" id="typing-indicator">Analyzing Rulebook...</div>
             <div id="chat-input-area">
-                <input type="text" id="chat-input" placeholder="e.g. What happens if someone plays an unregistered player?" autocomplete="off">
+                <input type="text" id="chat-input"
+                    placeholder="e.g. What happens if someone plays an unregistered player?" autocomplete="off">
                 <button id="send-btn">➤</button>
             </div>
         </div>
@@ -375,15 +451,15 @@
                 .then(text => {
                     // Render HTML
                     document.getElementById('rulebook-content').innerHTML = marked.parse(text);
-                    
+
                     // Generate TOC dynamically from h1 tags (Sections)
                     const tocList = document.getElementById('toc-list');
                     tocList.innerHTML = '';
-                    
+
                     const headings = document.querySelectorAll('#rulebook-content h1');
                     headings.forEach((heading, index) => {
                         // Create ID if not exists
-                        if(!heading.id) {
+                        if (!heading.id) {
                             heading.id = 'section-' + index;
                         }
                         const li = document.createElement('li');
@@ -411,7 +487,7 @@
         // Toggle chat visibility
         chatToggleBtn.addEventListener('click', () => {
             chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
-            if(chatWindow.style.display === 'flex') chatInput.focus();
+            if (chatWindow.style.display === 'flex') chatInput.focus();
         });
         closeChatBtn.addEventListener('click', () => chatWindow.style.display = 'none');
 
@@ -419,14 +495,14 @@
         function appendMessage(text, sender) {
             const msgDiv = document.createElement('div');
             msgDiv.classList.add('msg', sender);
-            
+
             // Format bold text from markdown-like responses (**text**)
             let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             // Format line breaks
             formattedText = formattedText.replace(/\n/g, '<br>');
-            
+
             msgDiv.innerHTML = formattedText;
-            
+
             chatMessages.appendChild(msgDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
         }
@@ -434,12 +510,12 @@
         // Send message to API
         async function sendMessage() {
             const text = chatInput.value.trim();
-            if(!text) return;
+            if (!text) return;
 
             // Display user message
             appendMessage(text, 'user');
             chatInput.value = '';
-            
+
             // Show typing indicator
             typingIndicator.style.display = 'block';
             chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -452,12 +528,12 @@
                     body: JSON.stringify({ message: text })
                 });
 
-                if(!response.ok) {
+                if (!response.ok) {
                     throw new Error(`API error: ${response.status}`);
                 }
 
                 const data = await response.json();
-                
+
                 typingIndicator.style.display = 'none';
                 appendMessage(data.reply, 'bot');
 
@@ -470,7 +546,7 @@
 
         sendBtn.addEventListener('click', sendMessage);
         chatInput.addEventListener('keypress', (e) => {
-            if(e.key === 'Enter') sendMessage();
+            if (e.key === 'Enter') sendMessage();
         });
 
         // --- 3. Mobile TOC Logic ---
@@ -482,11 +558,66 @@
             });
             // Auto-close sidebar on mobile when a link is clicked
             sidebar.addEventListener('click', (e) => {
-                if(e.target.tagName === 'A' && window.innerWidth <= 900) {
+                if (e.target.tagName === 'A' && window.innerWidth <= 900) {
                     sidebar.classList.remove('active');
                 }
             });
         }
+
+        // --- 4. Draggable Chat Window ---
+        const chatHeader = document.getElementById('chat-header');
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        chatHeader.addEventListener('mousedown', dragStart);
+        document.addEventListener('mousemove', drag);
+        document.addEventListener('mouseup', dragEnd);
+
+        // Touch support for mobile
+        chatHeader.addEventListener('touchstart', dragStart, { passive: true });
+        document.addEventListener('touchmove', drag, { passive: false });
+        document.addEventListener('touchend', dragEnd);
+
+        function dragStart(e) {
+            if (e.target.id === 'close-chat') return; // Ignore close button click
+            if (e.type === 'touchstart') {
+                initialX = e.touches[0].clientX - xOffset;
+                initialY = e.touches[0].clientY - yOffset;
+            } else {
+                initialX = e.clientX - xOffset;
+                initialY = e.clientY - yOffset;
+            }
+            isDragging = true;
+        }
+
+        function drag(e) {
+            if (isDragging) {
+                if (e.type === 'touchmove') e.preventDefault();
+
+                if (e.type === 'touchmove') {
+                    currentX = e.touches[0].clientX - initialX;
+                    currentY = e.touches[0].clientY - initialY;
+                } else {
+                    currentX = e.clientX - initialX;
+                    currentY = e.clientY - initialY;
+                }
+
+                xOffset = currentX;
+                yOffset = currentY;
+
+                chatWindow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+            }
+        }
+
+        function dragEnd(e) {
+            isDragging = false;
+        }
     </script>
 </body>
+
 </html>
