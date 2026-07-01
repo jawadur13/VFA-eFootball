@@ -15,9 +15,23 @@
             align-items: start;
         }
         
+        .mobile-toc-toggle {
+            display: none;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            color: var(--vcl-gold);
+            padding: 12px 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+        }
+        
         .toc-sidebar {
             position: sticky;
             top: 100px;
+            align-self: start;
             background: var(--surface-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
@@ -141,8 +155,8 @@
             position: absolute;
             bottom: 85px;
             right: 0;
-            width: 380px;
-            height: 550px;
+            width: 320px;
+            height: 480px;
             background: var(--bg-dark);
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -259,10 +273,17 @@
             .rules-layout {
                 grid-template-columns: 1fr;
             }
+            .mobile-toc-toggle {
+                display: block;
+            }
             .toc-sidebar {
+                display: none;
                 position: static;
-                max-height: 250px;
+                max-height: none;
                 margin-bottom: 20px;
+            }
+            .toc-sidebar.active {
+                display: block;
             }
             .rulebook-content {
                 padding: 20px;
@@ -273,11 +294,12 @@
             
             #chat-window {
                 position: fixed;
-                bottom: 0;
-                right: 0;
-                width: 100vw;
-                height: 100vh;
-                border-radius: 0;
+                bottom: 100px;
+                right: 20px;
+                width: calc(100vw - 40px);
+                height: 400px;
+                max-height: calc(100vh - 140px);
+                border-radius: 12px;
                 z-index: 10000;
             }
             #vfa-chat-widget {
@@ -297,6 +319,11 @@
         </section>
 
         <div class="rules-layout">
+            <!-- Mobile Toggle -->
+            <div class="mobile-toc-toggle" id="mobile-toc-toggle">
+                ☰ Table of Contents
+            </div>
+
             <!-- Sidebar TOC -->
             <aside class="toc-sidebar">
                 <h3>Sections</h3>
@@ -445,6 +472,21 @@
         chatInput.addEventListener('keypress', (e) => {
             if(e.key === 'Enter') sendMessage();
         });
+
+        // --- 3. Mobile TOC Logic ---
+        const mobileTocToggle = document.getElementById('mobile-toc-toggle');
+        const sidebar = document.querySelector('.toc-sidebar');
+        if (mobileTocToggle && sidebar) {
+            mobileTocToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+            // Auto-close sidebar on mobile when a link is clicked
+            sidebar.addEventListener('click', (e) => {
+                if(e.target.tagName === 'A' && window.innerWidth <= 900) {
+                    sidebar.classList.remove('active');
+                }
+            });
+        }
     </script>
 </body>
 </html>
