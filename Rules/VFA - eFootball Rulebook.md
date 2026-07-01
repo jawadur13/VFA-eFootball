@@ -68,7 +68,7 @@
 
 ## **1.4 Authority of the VFA Administration**
 
-**The tournament shall be managed by the VFA Administration, consisting of three (3) official administrators appointed to organize and oversee all competitions.**
+**The tournament shall be managed by the VFA Administration, consisting of four (4) official administrators appointed to organize and oversee all competitions.**
 
 **The responsibilities of the VFA Administration include, but are not limited to:**
 
@@ -1789,7 +1789,7 @@
 
 ## **17.7 Internal Deliberation**
 
-**The VFA Administration consists of three (3) administrators.**
+**The VFA Administration consists of four (4) administrators.**
 
 **Administrative discussions and internal deliberations are confidential.**
 
