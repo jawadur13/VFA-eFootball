@@ -504,7 +504,7 @@
 
 **✅ Wretchedly Terrible FC has officially acquired Mbappé through the VFA Transfer Window. The manager may use any eligible Mbappé card available in their account.**
 
-**❌ Astral Warriors uses a player who is officially registered to Beast Era FC. This constitutes the use of an unregistered player and shall be subject to penalties described elsewhere in this Rulebook.**
+**❌ Astral Warriors uses a player who is officially registered to Beast Era FC. This constitutes the use of an unregistered player and shall be subject to the penalties described in Section 11.7.**
 
 ---
 
@@ -648,7 +648,7 @@
 
 **A match may still be played even if a manager forgets to begin recording.**
 
-**However, failure to submit a valid recording after the match shall be treated as a violation of the Smart Assist policy and handled according to the penalties described in this Rulebook.**
+**However, failure to submit a valid recording after the match shall be treated as a violation of the Smart Assist policy and handled according to the penalties described in Section 8.6.**
 
 ---
 
@@ -1598,7 +1598,7 @@
 **16.2.3** **🥉 Third Place**  
 **16.2.4** **🏅 Fourth Place**
 
-**League standings shall determine the final rankings according to the official tiebreaker system described in this Rulebook.**
+**League standings shall determine the final rankings according to the official tiebreaker system described in Section 4.2.**
 
 ---
 
@@ -1767,7 +1767,7 @@
 
 ## **17.8 Final Authority**
 
-**Except where an appeal is specifically permitted under this Rulebook, decisions issued by the VFA Administration shall be final and binding upon every participant.**
+**Except where an appeal is specifically permitted under Section 13.7, decisions issued by the VFA Administration shall be final and binding upon every participant.**
 
 **Participation in the tournament constitutes acceptance of this authority.**
 
