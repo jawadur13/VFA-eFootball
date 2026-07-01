@@ -423,25 +423,7 @@
         </div>
     </main>
 
-    <!-- AI Chatbot Widget -->
-    <div id="vfa-chat-widget">
-        <button id="chat-toggle-btn" aria-label="Open Chat">💬</button>
-        <div id="chat-window">
-            <div id="chat-header">
-                <h4>🤖 VFA Rules Assistant</h4>
-                <button id="close-chat" aria-label="Close Chat">✖</button>
-            </div>
-            <div id="chat-messages">
-                <div class="msg bot">Hello! I am the official VFA AI Assistant. What do you need help with?</div>
-            </div>
-            <div class="typing-indicator" id="typing-indicator">Analyzing Rulebook...</div>
-            <div id="chat-input-area">
-                <input type="text" id="chat-input"
-                    placeholder="e.g. What happens if someone plays an unregistered player?" autocomplete="off">
-                <button id="send-btn">➤</button>
-            </div>
-        </div>
-    </div>
+
 
     <div id="main-footer"></div>
 
@@ -481,80 +463,6 @@
                 });
         });
 
-        // --- 2. Chatbot Logic ---
-        const chatToggleBtn = document.getElementById('chat-toggle-btn');
-        const chatWindow = document.getElementById('chat-window');
-        const closeChatBtn = document.getElementById('close-chat');
-        const chatInput = document.getElementById('chat-input');
-        const sendBtn = document.getElementById('send-btn');
-        const chatMessages = document.getElementById('chat-messages');
-        const typingIndicator = document.getElementById('typing-indicator');
-
-        // Toggle chat visibility
-        chatToggleBtn.addEventListener('click', () => {
-            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
-            if (chatWindow.style.display === 'flex') chatInput.focus();
-        });
-        closeChatBtn.addEventListener('click', () => chatWindow.style.display = 'none');
-
-        // Add message to UI
-        function appendMessage(text, sender) {
-            const msgDiv = document.createElement('div');
-            msgDiv.classList.add('msg', sender);
-
-            // Format bold text from markdown-like responses (**text**)
-            let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            // Format line breaks
-            formattedText = formattedText.replace(/\n/g, '<br>');
-
-            msgDiv.innerHTML = formattedText;
-
-            chatMessages.appendChild(msgDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        // Send message to API
-        async function sendMessage() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-
-            // Display user message
-            appendMessage(text, 'user');
-            chatInput.value = '';
-
-            // Show typing indicator
-            typingIndicator.style.display = 'block';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
-            try {
-                // Send to Vercel Serverless Function
-                const response = await fetch('/api/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`API error: ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                typingIndicator.style.display = 'none';
-                appendMessage(data.reply, 'bot');
-
-            } catch (error) {
-                typingIndicator.style.display = 'none';
-                console.error(error);
-                appendMessage("Sorry, I'm having trouble connecting to the administration servers right now. Please make sure the site is deployed on Vercel.", 'bot');
-            }
-        }
-
-        sendBtn.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') sendMessage();
-        });
-
         // --- 3. Mobile TOC Logic ---
         const mobileTocToggle = document.getElementById('mobile-toc-toggle');
         const sidebar = document.querySelector('.toc-sidebar');
@@ -568,60 +476,6 @@
                     sidebar.classList.remove('active');
                 }
             });
-        }
-
-        // --- 4. Draggable Chat Window ---
-        const chatHeader = document.getElementById('chat-header');
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        let xOffset = 0;
-        let yOffset = 0;
-
-        chatHeader.addEventListener('mousedown', dragStart);
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', dragEnd);
-
-        // Touch support for mobile
-        chatHeader.addEventListener('touchstart', dragStart, { passive: true });
-        document.addEventListener('touchmove', drag, { passive: false });
-        document.addEventListener('touchend', dragEnd);
-
-        function dragStart(e) {
-            if (e.target.id === 'close-chat') return; // Ignore close button click
-            if (e.type === 'touchstart') {
-                initialX = e.touches[0].clientX - xOffset;
-                initialY = e.touches[0].clientY - yOffset;
-            } else {
-                initialX = e.clientX - xOffset;
-                initialY = e.clientY - yOffset;
-            }
-            isDragging = true;
-        }
-
-        function drag(e) {
-            if (isDragging) {
-                if (e.type === 'touchmove') e.preventDefault();
-
-                if (e.type === 'touchmove') {
-                    currentX = e.touches[0].clientX - initialX;
-                    currentY = e.touches[0].clientY - initialY;
-                } else {
-                    currentX = e.clientX - initialX;
-                    currentY = e.clientY - initialY;
-                }
-
-                xOffset = currentX;
-                yOffset = currentY;
-
-                chatWindow.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
-            }
-        }
-
-        function dragEnd(e) {
-            isDragging = false;
         }
     </script>
 </body>
