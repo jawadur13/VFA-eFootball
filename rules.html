@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VFA eFootball | Official Rulebook</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .rules-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 40px;
+            margin: 40px 0;
+            align-items: start;
+        }
+        
+        @media (max-width: 900px) {
+            .rules-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .toc-sidebar {
+            position: sticky;
+            top: 100px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 20px;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        
+        .toc-sidebar h3 {
+            color: var(--vcl-gold);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .toc-sidebar ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc-sidebar li {
+            margin-bottom: 10px;
+        }
+        
+        .toc-sidebar a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+            display: block;
+            line-height: 1.4;
+        }
+        
+        .toc-sidebar a:hover {
+            color: var(--vpl-primary);
+        }
+        
+        .rulebook-content {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 40px;
+            color: var(--text-main);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+        
+        /* Markdown Styling */
+        .rulebook-content h1 {
+            color: var(--vpl-primary);
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(30, 144, 255, 0.2);
+            font-size: 1.8rem;
+        }
+        .rulebook-content h1:first-child { margin-top: 0; }
+        .rulebook-content h2 {
+            color: var(--vcl-gold);
+            margin: 30px 0 15px;
+            font-size: 1.4rem;
+        }
+        .rulebook-content h3 {
+            color: #fff;
+            margin: 25px 0 10px;
+            font-size: 1.15rem;
+        }
+        .rulebook-content p { margin-bottom: 15px; }
+        .rulebook-content ul, .rulebook-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        .rulebook-content li {
+            margin-bottom: 8px;
+        }
+        .rulebook-content hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 30px 0;
+            opacity: 0.3;
+        }
+        .rulebook-content strong { color: #fff; font-weight: 600; }
+
+        /* AI Chat Widget */
+        #vfa-chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+        #chat-toggle-btn {
+            background: var(--vpl-primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, background 0.3s;
+        }
+        #chat-toggle-btn:hover {
+            transform: scale(1.1);
+            background: #106ebd;
+        }
+        #chat-window {
+            display: none;
+            position: absolute;
+            bottom: 85px;
+            right: 0;
+            width: 380px;
+            height: 550px;
+            background: var(--bg-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            flex-direction: column;
+            overflow: hidden;
+        }
+        #chat-header {
+            background: var(--surface-card);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #chat-header h4 {
+            margin: 0;
+            color: var(--vcl-gold);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #close-chat {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 20px;
+            transition: color 0.2s;
+        }
+        #close-chat:hover { color: white; }
+        
+        #chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .msg {
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+        .msg.bot {
+            background: var(--surface-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .msg.user {
+            background: var(--vpl-primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .msg strong {
+            color: var(--vcl-gold);
+        }
+        
+        #chat-input-area {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            background: var(--surface-card);
+            gap: 10px;
+        }
+        #chat-input {
+            flex: 1;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 12px 18px;
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.95rem;
+            transition: border-color 0.2s;
+        }
+        #chat-input:focus {
+            border-color: var(--vpl-primary);
+        }
+        #send-btn {
+            background: var(--vpl-primary);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: background 0.2s;
+        }
+        #send-btn:hover { background: #106ebd; }
+        
+        .typing-indicator {
+            display: none;
+            padding: 0 20px 15px;
+            color: var(--vcl-gold);
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            #chat-window {
+                position: fixed;
+                bottom: 0;
+                right: 0;
+                width: 100vw;
+                height: 100vh;
+                border-radius: 0;
+                z-index: 10000;
+            }
+            #vfa-chat-widget {
+                bottom: 20px;
+                right: 20px;
+            }
+            .rulebook-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="main-header"></div>
+
+    <main class="container">
+        <section style="margin: 40px 0; text-align: center;">
+            <h1 style="color: var(--vpl-primary); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px;">Official Rulebook</h1>
+            <p style="color: var(--vcl-gold); font-weight: bold; letter-spacing: 2px;">VFA SEASON 8 REGULATIONS</p>
+        </section>
+
+        <div class="rules-layout">
+            <!-- Sidebar TOC -->
+            <aside class="toc-sidebar">
+                <h3>Sections</h3>
+                <ul id="toc-list">
+                    <li><span class="spinner" style="width: 15px; height: 15px; border-width: 2px;"></span> Loading...</li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <div class="rulebook-content" id="rulebook-content">
+                <div class="loader-container">
+                    <div class="spinner"></div>
+                    <span style="color: var(--text-muted); margin-top: 15px;">Loading Rulebook Document...</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- AI Chatbot Widget -->
+    <div id="vfa-chat-widget">
+        <button id="chat-toggle-btn" aria-label="Open Chat">💬</button>
+        <div id="chat-window">
+            <div id="chat-header">
+                <h4>🤖 VFA Rules Assistant</h4>
+                <button id="close-chat" aria-label="Close Chat">✖</button>
+            </div>
+            <div id="chat-messages">
+                <div class="msg bot">Hello! I am the official VFA AI Assistant. I have memorized the entire Season 8 Rulebook. What do you need help with?</div>
+            </div>
+            <div class="typing-indicator" id="typing-indicator">Analyzing Rulebook...</div>
+            <div id="chat-input-area">
+                <input type="text" id="chat-input" placeholder="e.g. What happens if someone plays an unregistered player?" autocomplete="off">
+                <button id="send-btn">➤</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-footer"></div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        // --- 1. Fetch & Render Markdown ---
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('Rules/VFA - eFootball Rulebook.md')
+                .then(response => {
+                    if (!response.ok) throw new Error("Could not load rulebook");
+                    return response.text();
+                })
+                .then(text => {
+                    // Render HTML
+                    document.getElementById('rulebook-content').innerHTML = marked.parse(text);
+                    
+                    // Generate TOC dynamically from h1 tags (Sections)
+                    const tocList = document.getElementById('toc-list');
+                    tocList.innerHTML = '';
+                    
+                    const headings = document.querySelectorAll('#rulebook-content h1');
+                    headings.forEach((heading, index) => {
+                        // Create ID if not exists
+                        if(!heading.id) {
+                            heading.id = 'section-' + index;
+                        }
+                        const li = document.createElement('li');
+                        const a = document.createElement('a');
+                        a.href = '#' + heading.id;
+                        a.textContent = heading.innerText.replace(/#/, '').trim();
+                        li.appendChild(a);
+                        tocList.appendChild(li);
+                    });
+                })
+                .catch(err => {
+                    document.getElementById('rulebook-content').innerHTML = `<p style="color: var(--accent-red)">Error loading rulebook: ${err.message}</p>`;
+                });
+        });
+
+        // --- 2. Chatbot Logic ---
+        const chatToggleBtn = document.getElementById('chat-toggle-btn');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChatBtn = document.getElementById('close-chat');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const chatMessages = document.getElementById('chat-messages');
+        const typingIndicator = document.getElementById('typing-indicator');
+
+        // Toggle chat visibility
+        chatToggleBtn.addEventListener('click', () => {
+            chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+            if(chatWindow.style.display === 'flex') chatInput.focus();
+        });
+        closeChatBtn.addEventListener('click', () => chatWindow.style.display = 'none');
+
+        // Add message to UI
+        function appendMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('msg', sender);
+            
+            // Format bold text from markdown-like responses (**text**)
+            let formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // Format line breaks
+            formattedText = formattedText.replace(/\n/g, '<br>');
+            
+            msgDiv.innerHTML = formattedText;
+            
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Send message to API
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if(!text) return;
+
+            // Display user message
+            appendMessage(text, 'user');
+            chatInput.value = '';
+            
+            // Show typing indicator
+            typingIndicator.style.display = 'block';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            try {
+                // Send to Vercel Serverless Function
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+
+                if(!response.ok) {
+                    throw new Error(`API error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                typingIndicator.style.display = 'none';
+                appendMessage(data.reply, 'bot');
+
+            } catch (error) {
+                typingIndicator.style.display = 'none';
+                console.error(error);
+                appendMessage("Sorry, I'm having trouble connecting to the administration servers right now. Please make sure the site is deployed on Vercel.", 'bot');
+            }
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
