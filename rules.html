@@ -15,12 +15,6 @@
             align-items: start;
         }
         
-        @media (max-width: 900px) {
-            .rules-layout {
-                grid-template-columns: 1fr;
-            }
-        }
-        
         .toc-sidebar {
             position: sticky;
             top: 100px;
@@ -63,6 +57,7 @@
         }
         
         .rulebook-content {
+            min-width: 0; /* CRITICAL: Prevents CSS Grid blowout */
             background: var(--surface-card);
             border: 1px solid var(--border-color);
             border-radius: var(--radius);
@@ -70,6 +65,9 @@
             color: var(--text-main);
             line-height: 1.8;
             font-size: 1.05rem;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            overflow-x: hidden;
         }
         
         /* Markdown Styling */
@@ -106,6 +104,11 @@
             opacity: 0.3;
         }
         .rulebook-content strong { color: #fff; font-weight: 600; }
+        .rulebook-content img, .rulebook-content video {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
 
         /* AI Chat Widget */
         #vfa-chat-widget {
@@ -251,8 +254,23 @@
             font-style: italic;
         }
 
-        /* Responsive */
-        @media (max-width: 480px) {
+        /* Responsive Improvements */
+        @media (max-width: 900px) {
+            .rules-layout {
+                grid-template-columns: 1fr;
+            }
+            .toc-sidebar {
+                position: static;
+                max-height: 250px;
+                margin-bottom: 20px;
+            }
+            .rulebook-content {
+                padding: 20px;
+                font-size: 1rem;
+            }
+            .rulebook-content h1 { font-size: 1.5rem; }
+            .rulebook-content h2 { font-size: 1.25rem; }
+            
             #chat-window {
                 position: fixed;
                 bottom: 0;
@@ -265,9 +283,6 @@
             #vfa-chat-widget {
                 bottom: 20px;
                 right: 20px;
-            }
-            .rulebook-content {
-                padding: 20px;
             }
         }
     </style>
