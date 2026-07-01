@@ -233,6 +233,12 @@
 
 ---
 
+### **Active Manager**
+
+**A manager who makes reasonable efforts to communicate, schedule, and complete fixtures before the official deadline.**
+
+---
+
 ### **Club / Team**
 
 **A registered participant competing in the tournament.**
@@ -305,6 +311,36 @@
 
 ---
 
+### **Decider Match**
+
+**A final, tie-breaking fixture played to determine the winner of a knockout tie when both the aggregate score and away goals remain exactly equal after two legs.**
+
+---
+
+### **Transfer Window**
+
+**A specific timeframe designated by the VFA Administration during which managers are permitted to officially acquire or release registered players.**
+
+---
+
+### **Smart Assist**
+
+**An in-game eFootball feature that automates gameplay decisions. The use of Smart Assist is strictly prohibited in all official VFA fixtures.**
+
+---
+
+### **VPN (Virtual Private Network)**
+
+**A third-party network routing application used by managers to stabilize connections during matchmaking when standard matchmaking fails.**
+
+---
+
+### **Match Fixing / Win Trading**
+
+**The strictly prohibited act of deliberately manipulating the outcome or events of an official fixture, often through collusion between managers, to achieve a pre-determined result.**
+
+---
+
 # **SECTION 4: TOURNAMENT STRUCTURE**
 
 ## **4.1 General Structure**
@@ -336,7 +372,7 @@
 
 **Therefore:**
 
-**4.2.6** **Every club plays 22 different opponents' fixtures? ❌ (No, because there are 12 teams.)**
+**4.2.6** **Each club plays a total of twenty-two (22) league matches, consisting of eleven (11) home fixtures and eleven (11) away fixtures.**
 
 **With 12 clubs:**
 
