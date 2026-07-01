@@ -91,7 +91,7 @@ function initChatbot() {
         } catch (error) {
             typingIndicator.style.display = 'none';
             console.error(error);
-            appendMessage("Sorry, I'm having trouble connecting to the administration servers right now. Please make sure the site is deployed on Vercel.", 'bot');
+            appendMessage("RuleBot is temporarily unavailable. Please try again in a moment.", 'bot');
         }
     }
 
