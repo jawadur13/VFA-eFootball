@@ -416,6 +416,8 @@
 
 **The VFA Champions League uses a Swiss League Stage followed by a Knockout Stage.**
 
+**The Knockout Stage shall consist of a Playoff Round, Quarter-Finals, Semi-Finals, and Final.**
+
 **For Season 8:**
 
 **4.3.1** **Participating Clubs: 12**
@@ -695,9 +697,20 @@
 **The Knockout Stage shall consist of:**
 
 **7.1.1** **Playoff Round**  
+**5th vs 8th**  
+**6th vs 7th**
+
 **7.1.2** **Quarter-Finals**  
+**3rd vs Winner of 5th/8th**  
+**4th vs Winner of 6th/7th**
+
 **7.1.3** **Semi-Finals**  
+**1st vs Winner of QF2**  
+**2nd vs Winner of QF1**
+
 **7.1.4** **Final**
+
+**Winner of SF1 vs Winner of SF2**
 
 **Except for the Final, every knockout tie shall be played over two legs.**
 
