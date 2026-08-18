@@ -110,7 +110,8 @@
                         : `<div style="width:30px;height:30px;border-radius:50%;background:var(--surface-hover);display:inline-block;"></div>`;
                     const isTop4 = i < 4;
                     const nameStyle = isTop4 ? 'font-weight:bold;' : '';
-                    const pointsText = t.name.toLowerCase() === 'mystic spyder' ? t.pts + '<sup style="color: var(--vpl-primary); margin-left: 2px; font-size: 1.1em;">*</sup>' : t.pts;
+                    const markedTeams = ['mystic spyder', 'scarlet shield xi'];
+                    const pointsText = markedTeams.includes(t.name.toLowerCase()) ? t.pts + '<sup style="color: var(--vpl-primary); margin-left: 2px; font-size: 1.1em;">*</sup>' : t.pts;
                     return `
                             <tr class="${isTop4 ? 'qualify-zone' : ''}">
                                 <td style="padding-left:20px;">${i + 1}</td>
